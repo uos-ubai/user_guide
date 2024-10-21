@@ -1,0 +1,41 @@
+project:
+  type: book
+
+book:
+  title: "UBAI GUIDE BOOK"
+  author: "hs.hwang"
+  date: "2024. 10. 16."
+  page-footer:
+    left: |
+      Urban Big Data and AI Institution
+    right: |
+      University of Seoul
+  chapters:
+    - index.qmd
+    - UBAI Cluster.qmd
+    - 계정 생성.qmd
+    - 접속 방법.qmd
+    - 환경 구축.qmd
+    - Python 실행.qmd
+    - 파일 로드.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: 
+      - minty
+      - r4ds.scss
+    author-meta: "hs.hwang"
+    callout-appearance: simple
+    fontsize: 1em
+    linestretch: 1.5
+    code-overflow: wrap
+    code-block-bg: true
+    code-block-border-left: true
+    number-sections: false
+  pdf:
+    documentclass: scrreprt
+
+
+

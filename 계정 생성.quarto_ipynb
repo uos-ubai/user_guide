@@ -1,0 +1,42 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# 계정 생성\n",
+        "UBAI Cluster 사용을 위해서는 개인 계정을 배부받아야 합니다.\n",
+        "\n",
+        "## 계정 신청\n",
+        "\n",
+        "UBAI 홈페이지에서 슈퍼 컴퓨팅 사용 신청 방법을 잘 읽어보시고, 사용 신청서를 다운 받아 관리자 메일(ubaisysadmin@uos.ac.kr)에 제출합니다.\n",
+        "\n",
+        "UBAI 홈페이지 바로가기: https://ubai.uos.ac.kr/forum/view/679982\n",
+        "\n",
+        "## 키파일 저장\n",
+        "첨부파일을 통해 저장한 키파일(사용자_ID.pem)을 아래의 경로로 이동합니다.\n"
+      ],
+      "id": "95938fe1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "\"C:\\User\\{사용자이름폴더}\\.ssh\""
+      ],
+      "id": "377642a3",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\UOS\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

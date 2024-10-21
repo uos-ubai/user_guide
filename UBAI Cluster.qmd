@@ -1,0 +1,92 @@
+---
+title: UBAI Cluster
+engine: knitr
+---
+
+## UBAI {.unnumbered}
+
+도시과학빅데이터·AI연구원(이하 UBAI)은 사용자에게 고성능컴퓨팅(HPC) 자원을 제공합니다. 
+
+사용자는 Slurm을 통해 독점적인 자원을 할당받고 AI학습 및 추론, 연산, 시뮬레이션 등의 작업(Job)을 수행할 수 있습니다.
+
+**💡 Slurm**
+
+    Slurm은 다양한 사용자들의 다양한 요구를 수용하고(Job Submit), 
+    각 사용자들의 작업을 스케줄링하며(Task Scheduling), 
+    자원을 관리(Resource Management)하는 Linux 유틸리티 입니다.
+
+
+UBAI는 여러 명의 사용자에게 UBAI Cluster를 제공하기 위해 Slurm을 사용합니다.
+
+Slurm에 대해 보다 자세한 설명 및 사용법을 원하시는 분은 [Slurm페이지](https://orange-cabbage-c9c.notion.site/UBAI-Slurm-d8fe6f744ff6431abc9dd0af96aca76a)로 이동하세요.
+
+**💡 Visual Studio Code**
+
+    Visual Studio Code(이하 VScode)는 Microsoft에서 오픈소스로 개발한 소스 코드 에디터입니다. 
+    MacOS, Linux, Windows와 같은 다양한 운영체제와 다양한 확장 기술을 지원하여, 
+    전 세계적으로 널리 활용되고 있습니다.
+
+UBAI는 VScode를 이용한 서버 접속 방법을 제공합니다.
+
+서버 접속에 앞서 VScode의 이용법을 알고 있어야 합니다. VScode는 [홈페이지](https://code.visualstudio.com/download)에서 다운받을 수 있으며, VScode 사용과 관련한 자세한 사항은 [공식 문서](https://code.visualstudio.com/docs)를 참고하세요.
+
+## Partition {.unnumbered}
+
+Slurm에서 Partition은 특정 자원 그룹을 정의하는 논리적 단위입니다. 
+
+사용자들이 작업을 제출할 때 특정 Partition을 지정하여 자원을 할당받을 수 있습니다.
+
+Partition 목록은 아래와 같습니다.
+
+| **Partition** | **# of Nodes** | **# of Cores/node** | **CPU**                  | **GPU/node**   | **Memory/node** | **SSD** | **Note** |
+|---------------|----------------|----------------------|--------------------------|----------------|-----------------|---------|----------|
+| gpu1          | 13             | 48                   | Intel Xeon Gold 6240R    | RTX3090 (4EA)  | 768GB           | 2TB     | *        |
+| edu1          | 5              | 48                   | Intel Xeon Gold 6240R    | A10 (4EA)      | 768GB           | 2TB     | *        |
+| cpu1          | 30             | 48                   | Intel Xeon Gold 6240R    | None           | 768GB           | 2TB     | *        |
+| gpu2          | 10             | 56                   | Intel Xeon Gold 6348R    | A10 (8EA)      | 1024GB          | 2TB     | *        |
+| gpu3          | 11             | 56                   | Intel Xeon Gold 6348R    | A10 (4EA)      | 1024GB          | 2TB     | *        |
+| gpu4          | 29             | 56                   | Intel Xeon Gold 6348R    | A6000 (4EA)    | 1024GB          | 2TB     | *        |
+| gpu5          | 6              | 64                   | Intel Xeon Platinum-8358 | A6000 (4EA)    | 1024GB          | 2TB     | *        |
+
+<div style="font-size: 13px;">※ *UBAI는 총 106대의 노드, 총 5,586개의 CPU 코어와, 그래픽카드 RTX3090 52대, A10 144대, A6000 140대를 제공합니다.* </div>
+<br>
+
+Terminal에서 Partition 목록을 확인하기 위해서는 다음과 같은 명령어를 입력하세요.
+
+**입력 명령어**
+
+```{bash}
+#| eval: false
+sinfo -o "%10P %5D %14F %4c %14G %N"
+```
+
+**출력 예시**
+
+```{bash}
+#| eval: false
+PARTITION  NODES  NODES(A/I/O/T)  CPUS  GRES           NODELIST
+gpu1       13     10/3/0/13       48    gpu:rtx3090:4  n[001-013]
+cpu1       35     16/19/0/35      48    (null)         n[014-048]
+hgx        1      0/0/1/1         48    gpu:hgx:8      n050
+gpu2       32     26/6/0/32       56    gpu:a10:4      n[051-070,073-080,083-086]
+cpu2       14     14/0/0/14       56    (null)         n[087-100]
+cpu3       6      4/2/0/6         64    (null)         n[101-106]
+test       4      0/4/0/4         56    gpu:a10:4      n[071-072,081-082]
+```
+
+
+모든 사용자는 모든 파티션에 대해 MaxJobs(최대 수행 작업 수) 10, MaxSubmit(최대 작업 제출 수) 20, MaxWall(작업 당 최대 수행 시간) 2일로 제한이 걸려있습니다.
+
+|**Partition**|**MaxJobs**|**MaxSubmit**|**MaxWall**|
+|-------------|-----------|-------------|-----------|
+|*            |10         |20           |2-00:00:00 |
+
+## 사사의 글 안내  {.unnumbered}
+
+📌 도시과학빅데이터AI연구원의 슈퍼컴퓨터 자원을 이용하신 분들은 논문, 프로젝트, 통계 등
+실적에 다음과 같이 연구원 사사를 적어주시기 바랍니다.
+
+
+**(국문) 본 논문은 서울시립대학교 도시과학빅데이터AI연구원의 슈퍼컴퓨팅 자원을 지원 받아 수행되었습니다.**
+
+**(영문) The authors acknowledge the Urban Big data and AI Institute of the University of Seoul supercomputing resources (http://ubai.uos.ac.kr) made available for conducting the research reported in this paper.**

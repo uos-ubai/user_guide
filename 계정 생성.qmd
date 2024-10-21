@@ -1,0 +1,23 @@
+---
+title: Chapter1. 계정 생성
+engine: knitr
+lightbox: auto
+---
+
+UBAI Cluster 사용을 위해서는 개인 계정을 배부받아야 합니다.
+
+## 1. 계정 신청 {.unnumbered}
+
+[UBAI 홈페이지](https://ubai.uos.ac.kr/forum/view/679982)에 접속하여 슈퍼 컴퓨팅 사용 신청 방법을 확인합니다.
+
+이후 사용 신청서를 다운 받아 관리자 메일(ubaisysadmin@uos.ac.kr)에 제출합니다.
+
+## 2. 키파일 저장 {.unnumbered}
+첨부파일을 통해 저장한 키파일(사용자ID.pem)을 `C:\User\{사용자이름폴더}\.ssh\`의 경로로 이동합니다.
+
+
+![](./jpg/pemfile_2.jpg)
+
+
+<div style="font-size: 13px;">※ *만일 `.ssh`폴더가 없는 경우, **Chapter2. 접속 방법**의 `.ssh` 폴더 생성 순서를 우선 진행하세요.*</div>
+
