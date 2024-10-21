@@ -1,0 +1,15 @@
+{
+  "hash": "f8a625729efef8365a2c5ddb500c9456",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Chapter5. 파일 관리\nengine: knitr\n---\n\n\n\n\n\n\nUBAI에서 개인에게 할당하는 SSD 저장 공간은 100GB입니다. 저장 공간을 활용하여 파일을 다운로드하거나 업로드하는 방법에 대해 설명합니다.\n\n<div style=\"font-size: 13px;\">※ *메모리가 더 필요한 경우에는 관리자 메일(ubaisysadmin@uos.ac.kr)에 문의하셔서 저장 공간이 더 필요한 이유와 용량을 말씀해주시면 최대 1TB까지 확장 가능합니다.*</div>\n<br>\n\n## 1. 기본 파일 관리 {.unnumbered}\n\n대용량이 아닌 간단한 용량의 파일에 대해서는 VScode 자체에서 다운로드 및 업로드를 진행할 수 있습니다.\n\n### 1.1 다운로드\n\n다운로드 받고자 하는 파일에 커서를 위치한 후 오른쪽 마우스를 클릭하여 Download를 선택합니다.\n![](./jpg/download.jpg)\n\n### 1.2 업로드\n\n업로드의 경우, 로컬에서 파일을 직접 드래그하여 탐색기(Explorer)의 원하는 위치에 드롭하면 됩니다.\n\n## 2. 대용량 파일 관리 {.unnumbered}\n\n대용량 파일을 다운로드 및 업로드하기 위해서는 별도의 프로그램을 사용해야 합니다.\n여기서는 FileZilla를 이용하여 파일을 관리하는 법을 설명합니다. FileZilla를 이용하면 다운로드와 업로드 진행 과정을 볼 수 있습니다.\n\nFileZilla의 경우, [공식 홈페이지](https://filezilla-project.org/download.php?type=client)에서 다운받을 수 있습니다.\n\n### 2.1 다운로드\n1. 사이트 관리자 열기를 클릭합니다.\n![](./jpg/file_step1.jpg)\n\n2. New site 버튼을 클릭합니다.\n![](./jpg/file_step2.jpg)\n\n3. 프로토콜을 \"SFTP - SSH File Transfer Protocol\"로 바꿔줍니다.\n![](./jpg/file_step3.jpg)\n\n4. 순서대로 정보를 입력합니다.\n![](./jpg/file_step4.jpg)\n\n- 프로토콜: SFTP\n- 호스트: 서버 퍼블릭 IPv4 주소\n- 포트번호: 22\n- 로그온 유형: 키 파일\n- 사용자: 서버 인스턴스 플랫폼 (ex. ubuntu)\n- 키파일: 키파일(`.pem`파일) 등록\n- 연결 버튼 누르기\n\n다운로드 받고자 하는 리모트 사이트(오른쪽)의 파일에 커서를 위치한 후 오른쪽 마우스를 클릭하여 다운로드를 선택합니다.\n![](./jpg/file_download.jpg)\n\n\n### 2.2 업로드\n\n업로드의 경우, 로컬 사이트(왼쪽)에서 오른쪽 마우스를 클릭할 시 업로드라는 선택 칸을 확인할 수 있습니다.\n![](./jpg/file_upload.jpg)",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
