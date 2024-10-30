@@ -18,6 +18,7 @@ book:
     - 환경 구축.qmd
     - Python 실행.qmd
     - 파일 로드.qmd
+    - 프로젝트 실습.qmd
 
 bibliography: references.bib
 
