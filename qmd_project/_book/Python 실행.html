@@ -176,11 +176,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <a href="./파일 로드.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter5. 파일 관리</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./프로젝트 실습.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Chapter6. 프로젝트 실습</span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -274,79 +269,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>✔ <strong><code>echo "jobid: $SLURM_JOB_ID"</code></strong> jobid가 표기됩니다.</p>
 <p>✔ <strong><code>module ~</code></strong> 원하는 Linux 환경을 구축할 수 있습니다. GPU 환경을 사용하고 싶은 경우에만 해당하며, GPU 환경을 사용하지 않을 경우(CPU Partition 사용) 지우셔도 무관합니다. Chapter3. 환경 구축에서 설명한 module envrionment에 해당합니다. 자세한 설명은 해당 파트에서 확인하세요.</p>
 <p>✔ <strong><code>python cnn.py 12 256 'relu'</code></strong> 원하는 Python 파일을 실행합니다. 실행하려는 파일은 반드시 <code>.py</code>파일의 형태로 존재해야합니다. 위 코드에는 <code>cnn.py</code>로 지정하였습니다. Python의 sys 패키지를 이용한 <code>sys.argv</code>로 매개변수를 이용한 실행 방법을 사용하였습니다. 자세한 사항은 sys의 <a href="https://docs.python.org/3/library/sys.html">공식문서</a>에서 확인할 수 있습니다. 파라미터 없이 모델을 실행하고 싶은 경우에는 <code>python {filename}.py</code>로 실행할 수 있습니다.</p>
-<p>📌 <strong>참고사항</strong></p>
-<p><code>.py</code> 파일에서 sys 패키지를 사용할 경우, 매개변수는 다음과 같이 지정됩니다.</p>
-<ul>
-<li><p><strong>sys.argv[0]: 파일 이름</strong></p></li>
-<li><p><strong>sys.argv[n]: 원하는 파라미터 (n은 숫자를 의미합니다.)</strong></p></li>
-</ul>
-<p><code>cnn.py</code>의 경우, <code>12 256 'relu'</code>가 각각 sys.argv[1], sys.argv[2], sys.argv[3]으로 지정된 것입니다.</p>
-<p>실행에 사용된 cnn.py의 자세한 코드는 아래에서 확인할 수 있습니다.</p>
-<div class="cell" data-python.reticulate="false">
-<details class="code-fold">
-<summary>cnn code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> keras</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.python.keras <span class="im">import</span> layers</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.models <span class="im">import</span> Sequential</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.layers <span class="im">import</span> Dense, Dropout, Flatten</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.layers <span class="im">import</span> Conv2D, MaxPooling2D</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>img_rows <span class="op">=</span> <span class="dv">28</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>img_cols <span class="op">=</span> <span class="dv">28</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>(x_train, y_train), (x_test, y_test) <span class="op">=</span> keras.datasets.mnist.load_data()</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>input_shape <span class="op">=</span> (img_rows, img_cols, <span class="dv">1</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> x_train.reshape(x_train.shape[<span class="dv">0</span>], img_rows, img_cols, <span class="dv">1</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>x_test <span class="op">=</span> x_test.reshape(x_test.shape[<span class="dv">0</span>], img_rows, img_cols, <span class="dv">1</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> x_train.astype(<span class="st">'float32'</span>) <span class="op">/</span> <span class="fl">255.</span> <span class="co"># 데이터 정규화 </span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>x_test <span class="op">=</span> x_test.astype(<span class="st">'float32'</span>) <span class="op">/</span> <span class="fl">255.</span>  <span class="co"># 데이터 정규화 </span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'x_train shape:'</span>, x_train.shape)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_train.shape[<span class="dv">0</span>], <span class="st">'train samples'</span>)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_test.shape[<span class="dv">0</span>], <span class="st">'test samples'</span>)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">2</span>])</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>num_classes <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">1</span>])</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> keras.utils.to_categorical(y_train, num_classes) <span class="co"># 학습을 위한 원핫벡터로 변경 </span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> keras.utils.to_categorical(y_test, num_classes) <span class="co"># 원핫벡터로 변경 </span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Sequential()</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>model.add(Conv2D(<span class="dv">32</span>, kernel_size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>), strides<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>), padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>, input_shape<span class="op">=</span>input_shape))</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>model.add(MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>), strides<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>model.add(Conv2D(<span class="dv">64</span>, (<span class="dv">2</span>, <span class="dv">2</span>), activation<span class="op">=</span><span class="st">'relu'</span>, padding<span class="op">=</span><span class="st">'same'</span>))</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>model.add(MaxPooling2D(pool_size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>model.add(Dropout(<span class="fl">0.25</span>))</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>model.add(Flatten()) <span class="co"># fully connected layer </span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 완전 연결계층의 문제점은 데이터의 형상이 무시된다. </span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># conv2d로 이미지의 특성들을 뽑아내고 pooling계층을 이용하여 차원을 감소시킨후 dense layer를 사용하여 감소된 차원의 feature map들을 input으로 하여 효율적 학습을 진행 </span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>model.add(Dense(<span class="dv">1000</span>, activation<span class="op">=</span>sys.argv[<span class="dv">3</span>]))  <span class="co"># -&gt; Dense Layer와 같은 경우에는 가장 기본적인 층으로서 완전연결계층이다. </span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>model.add(Dropout(<span class="fl">0.5</span>)) <span class="co"># 과대적합방지를 위해 사용 </span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>model.add(Dense(num_classes, activation<span class="op">=</span><span class="st">'softmax'</span>)) </span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>model.summary()</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'categorical_crossentropy'</span>, optimizer<span class="op">=</span><span class="st">'adam'</span>, metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>hist <span class="op">=</span> model.fit(x_train, y_train, batch_size<span class="op">=</span>batch_size, epochs<span class="op">=</span>epochs, verbose<span class="op">=</span><span class="dv">1</span>, validation_data<span class="op">=</span>(x_test, y_test))</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.evaluate(x_test, y_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test loss:'</span>, score[<span class="dv">0</span>])</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy:'</span>, score[<span class="dv">1</span>])</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time() <span class="op">-</span> start</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(end)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 </section>
 <section id="배치-파일-실행" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="배치-파일-실행">1.2 배치 파일 실행</h3>
@@ -354,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>이후, terminal에 <code>sbatch</code> 명령어를 이용하여 지정한 배치 파일명을 입력 및 실행하세요. 이는 작업(job)을 제출한다는 의미입니다.</p>
 <p>실행 후 나온 결과 값은 작업(job)에 대한 ID이니 꼭 따로 저장하거나 메모해두시기를 요청드립니다.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> filename.sh    <span class="co"># ex) sbatch python_project.sh </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> filename.sh    <span class="co"># ex) sbatch python_project.sh </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="font-size: 13px;">
 ※ <em>예시코드인 cnn.py를 정상적으로 실행하기 위해서는 추가 패키지 설치 <code>pip install tensorflow &amp;&amp; pip install numpy</code>가 필요합니다.</em>
@@ -379,25 +301,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>아래의 사항을 본인의 작업(job)에 맞게 입력한 후, 본인이 원하는 파일의 이름을 지정하여 <code>filename.sh</code> 형식으로 파일을 저장합니다. 예를 들어 아래의 Shell 파일을 <code>jupyter_notebook.sh</code>로 저장합니다.</p>
 <p>파일명이 <code>.sh</code> 형식인지 반드시 확인하세요.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1 </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=gpu4 </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=14 </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --gres=gpu:1 </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=UBAIJOB</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -o ./결과값 도출 지정 폴더 이름/jupyter.%N.%j.out  # STDOUT </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -e ./결과값 도출 지정 폴더 이름/jupyter.%N.%j.err  # STDERR </span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"start at:"</span> <span class="kw">`</span><span class="fu">date</span><span class="kw">`</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"node: </span><span class="va">$HOSTNAME</span><span class="st">"</span> </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"jobid: </span><span class="va">$SLURM_JOB_ID</span><span class="st">"</span> </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> unload CUDA/11.2.2 </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load cuda/11.8.0 </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> jupyter lab <span class="va">$HOME</span> <span class="dt">\</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">--ip</span><span class="op">=</span>0.0.0.0 <span class="dt">\</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">--no-browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1 </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=gpu4 </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=14 </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --gres=gpu:1 </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=UBAIJOB</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -o ./결과값 도출 지정 폴더 이름/jupyter.%N.%j.out  # STDOUT </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH -e ./결과값 도출 지정 폴더 이름/jupyter.%N.%j.err  # STDERR </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"start at:"</span> <span class="kw">`</span><span class="fu">date</span><span class="kw">`</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"node: </span><span class="va">$HOSTNAME</span><span class="st">"</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"jobid: </span><span class="va">$SLURM_JOB_ID</span><span class="st">"</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> unload CUDA/11.2.2 </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load cuda/11.8.0 </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> jupyter lab <span class="va">$HOME</span> <span class="dt">\</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">--ip</span><span class="op">=</span>0.0.0.0 <span class="dt">\</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">--no-browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>결과값 도출 지정 폴더 이름을 반드시 지정해주세요. 각각 결과 값 폴더를 따로따로 만들어주거나 아니면 동일 폴더에 지정하셔도 됩니다.</p>
 <p>STDOUT은 결과 값 출력 파일, STDERR는 결과 값 도출 중 출력 되는 로그 파일입니다. 새 폴더를 만들기 위해서는 디렉토리(directory)에서 오른쪽 버튼을 눌러 새 폴더 만들기 버튼을 클릭하시면 됩니다.</p>
@@ -419,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>이후, terminal에 <code>sbatch</code> 명령어를 이용하여 지정한 배치 파일명을 입력 및 실행하세요. 이는 작업(job)을 제출한다는 의미입니다.</p>
 <p>실행 후 나온 결과 값은 작업(job)에 대한 ID이니 꼭 따로 저장하거나 메모해두시기를 요청드립니다.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> filename.sh    <span class="co"># ex) sbatch jupyter.sh </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> filename.sh    <span class="co"># ex) sbatch jupyter.sh </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>작업(job) 제출이 정상적으로 진행되었다면, STDOUT폴더 안에 OUT 파일이 생성됩니다.</p>
 <p>만일 OUT파일이 생성되지 않았다면, 해당 Partition의 노드에 기존 작업(job)이 모두 할당되어 수행하지 못했을 가능성이 높습니다. 이 경우 terminal에 <code>squeue</code> 명령어를 입력하시고, 본인의 ID를 찾습니다.</p>
