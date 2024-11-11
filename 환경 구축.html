@@ -446,8 +446,9 @@ image들이 모아져있는 dockerhub을 찾아보면
 </section>
 <section id="enroot-이미지-다운로드" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="enroot-이미지-다운로드">(2) Enroot 이미지 다운로드</h4>
-<p><strong>enroot</strong> 이미지는 작성 후 로컬 스토리지에 보관할 수도 있으며 (1~3), <a href="https://hub.docker.com/">docker hub</a>에서 이미지를 다운로드할 수도 있습니다.</p>
-<p>docker hub에서 이미지를 받을 때에는 꼭 <code>docker://</code> 접두사를 붙여야 합니다.</p>
+<p>프로젝트 수행을 위해 필요한 이미지를 <a href="https://hub.docker.com/">docker hub</a>에서 다운로드할 수 있습니다.</p>
+<p><img src="./jpg/dockerhub.jpg" class="img-fluid"></p>
+<p>docker hub에서 이미지를 다운 받을 때에는 꼭 <code>docker://</code> 접두사를 붙여야 합니다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dockerhub에서 원하는 이미지를 다운로드</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">enroot</span> import docker://eclipse/ubuntu_python</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -477,8 +478,8 @@ image들이 모아져있는 dockerhub을 찾아보면
 <p>여기서 주목할 점은 <code>--mount .:/mnt</code> 명령을 통해 호스트에 있는 디렉터리를 컨테이너에 특정 디렉터리로 마운트할 수 있다는 점입니다.</p>
 <p>따라서 mnt 디렉토리에 들어가시면 원래 본인의 home 디렉터리에 있는 파일들이 그대로 있는 것을 확인할 수 있습니다.</p>
 </section>
-<section id="eenroot-이미지-저장" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="eenroot-이미지-저장">(5) EEnroot 이미지 저장</h4>
+<section id="enroot-이미지-저장" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="enroot-이미지-저장">(5) Enroot 이미지 저장</h4>
 <p>enroot에서는 기본적으로 컨테이너의 상태가 유지되지 않기 때문에, 작업한 환경을 다시 실행할 수 있도록 하려면 환경을 이미지로 만들어 두는 과정이 필요합니다.</p>
 <p>enroot에서는 생성한 컨테이너 내에서 설정이나 파일 등을 추가해도 해당 내용이 지속되지 않습니다.</p>
 <p>그래서 생성한 컨테이너 환경을 저장해 나중에 재사용하고 싶다면 변경한 환경을 새로운 이미지로 저장해야 합니다.</p>

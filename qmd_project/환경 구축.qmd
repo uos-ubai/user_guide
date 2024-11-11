@@ -288,9 +288,11 @@ srun --pty -p gpu5 -c 2 /bin/bash
     
 #### (2) Enroot 이미지 다운로드 {.unnumbered}
 
-**enroot** 이미지는 작성 후 로컬 스토리지에 보관할 수도 있으며 (1~3), [docker hub](https://hub.docker.com/)에서 이미지를 다운로드할 수도 있습니다. 
+프로젝트 수행을 위해 필요한 이미지를 [docker hub](https://hub.docker.com/)에서 다운로드할 수 있습니다. 
 
-docker hub에서 이미지를 받을 때에는 꼭 `docker://` 접두사를 붙여야 합니다. 
+![](./jpg/dockerhub.jpg)
+
+docker hub에서 이미지를 다운 받을 때에는 꼭 `docker://` 접두사를 붙여야 합니다. 
 
 ```{bash}
 #| eval: false
@@ -335,7 +337,7 @@ enroot start --root --rw --mount .:/mnt ubuntu-test /bin/bash
 
 따라서 mnt 디렉토리에 들어가시면 원래 본인의 home 디렉터리에 있는 파일들이 그대로 있는 것을 확인할 수 있습니다.
 
-#### (5) EEnroot 이미지 저장 {.unnumbered}
+#### (5) Enroot 이미지 저장 {.unnumbered}
 
 enroot에서는 기본적으로 컨테이너의 상태가 유지되지 않기 때문에, 작업한 환경을 다시 실행할 수 있도록 하려면 환경을 이미지로 만들어 두는 과정이 필요합니다.
 
