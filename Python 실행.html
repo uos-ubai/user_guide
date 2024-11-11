@@ -230,8 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="bash-배치-파일-실행" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="bash-배치-파일-실행">1. BASH 배치 파일 실행</h2>
 <p>Bash 창에서 배치 파일을 실행하여 파이썬 프로젝트를 실행할 수 있습니다.</p>
-<p>작업(job) 실행 후, 최대 이틀 동안 실행 가능합니다. 시뮬레이션이나 실험을 진행함에 있어 시간이 더 걸릴 것으로 예상된다면 관리자 메일(ubaisysadmin@uos.ac.kr)에 문의하셔서 최대 진행되는 노드의 진행 시간을 더 늘릴 수 있습니다.</p>
-<p>최대 진행 시간은 일주일입니다.</p>
+<p>작업(job) 실행 후, 최대 이틀 동안 실행 가능합니다. 시뮬레이션이나 실험을 진행함에 있어 시간이 더 걸릴 것으로 예상된다면 관리자 메일(ubaisysadmin@uos.ac.kr)에 문의하셔서 최대 진행되는 노드의 진행 시간을 더 늘릴 수 있습니다. 최대 진행 시간은 일주일입니다.</p>
 <section id="배치-파일-생성" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="배치-파일-생성">1.1 배치 파일 생성</h3>
 <p>생성한 배치 파일의 내용은 아래와 같이 입력될 수 있습니다.</p>
@@ -258,6 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>결과값 도출 지정 폴더 이름을 반드시 지정해주세요. 각각 결과 값 폴더를 따로따로 만들어주거나 아니면 동일 폴더에 지정하셔도 됩니다.</p>
 <p>STDOUT은 결과 값 출력 파일, STDERR는 결과 값 도출 중 출력 되는 로그 파일입니다. 새 폴더를 만들기 위해서는 디렉토리(directory)에서 오른쪽 버튼을 눌러 새 폴더 만들기 버튼을 클릭하시면 됩니다.</p>
+<p><br></p>
 <p>각 라인들의 의미는 다음과 같습니다.</p>
 <p>✔ <strong><code>#SBATCH --nodes=1</code></strong> 총 필요 노드 수를 지정하는 명령어이며, 노드는 자동으로 컴퓨터가 배정해줍니다. nodes=1은 노드를 한 개만 사용하겠다는 의미입니다.</p>
 <p>✔ <strong><code>#SBATCH --partition=gpu4</code></strong> 사용할 Partition을 지정하는 명령어입니다. Partition 정보는 <strong>UBAI Cluster</strong> 페이지를 참고하세요.</p>
