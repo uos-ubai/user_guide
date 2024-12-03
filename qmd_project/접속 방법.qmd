@@ -90,7 +90,9 @@ Extension를 통해 Remote-SSH 확장 프로그램을 설치하셔야 합니다.
 
 이때에는 pem 파일을 vscode에서 열어보신 후, 아래와 같이 설정되어있는 지 확인해주세요.
 pem 파일은 **LF**의 형태여야 합니다.
+
 ![](./jpg/mac_lf.jpg)
 
 만일 본인의 pem 파일이 CRLF로 성정되어있다면, 해당 부분을 클릭하시면 다음과 같이 LF로 변경하실 수 있습니다.
+
 ![](./jpg/mac_crlf.jpg)

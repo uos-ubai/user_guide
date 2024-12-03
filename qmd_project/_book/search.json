@@ -104,7 +104,7 @@
     "href": "접속 방법.html#ssh-접속",
     "title": "Chapter2. 접속 방법",
     "section": "3. SSH 접속",
-    "text": "3. SSH 접속\n\nVScode에서 (CRTL+SHIFT+P)를 누릅니다.\n&gt; remote-ssh : connect to host를 입력한 후, 선택합니다. \ngate1 또는 gate2를 선택합니다. gate1과 gate2는 동일한 환경입니다. \n운영체제 선택에서 Linux를 선택합니다. \nContinue를 선택합니다. \ngate에 접속 후, 본인이 선택한 gate 넘버가 맞는지 왼쪽 아래의 SSH:gate 넘버를 확인합니다. \n그 후, 탐색기(Explorer)를 클릭한 후, Open Folder를 클릭하면 디렉토리가 생성됩니다. \n경로가 /home1/{사용자ID}가 맞는지 확인한 후, OK를 선택합니다. 이 단계는 새로운 파일이 생성되기 전까지는 접속할 때마다 계속 실행해주어야 합니다.\n여기까지 잘 진행되셨다면, SSH에 접속되었습니다!\n\n\n4. 주의 사항\n일부 Mac 사용자들 중, 접속이 원활히 이루어지지 않는 경우를 종종 확인할 수 있습니다.\n이때에는 pem 파일을 vscode에서 열어보신 후, 아래와 같이 설정되어있는 지 확인해주세요. pem 파일은 LF의 형태여야 합니다. \n만일 본인의 pem 파일이 CRLF로 성정되어있다면, 해당 부분을 클릭하시면 다음과 같이 LF로 변경하실 수 있습니다.",
+    "text": "3. SSH 접속\n\nVScode에서 (CRTL+SHIFT+P)를 누릅니다.\n&gt; remote-ssh : connect to host를 입력한 후, 선택합니다. \ngate1 또는 gate2를 선택합니다. gate1과 gate2는 동일한 환경입니다. \n운영체제 선택에서 Linux를 선택합니다. \nContinue를 선택합니다. \ngate에 접속 후, 본인이 선택한 gate 넘버가 맞는지 왼쪽 아래의 SSH:gate 넘버를 확인합니다. \n그 후, 탐색기(Explorer)를 클릭한 후, Open Folder를 클릭하면 디렉토리가 생성됩니다. \n경로가 /home1/{사용자ID}가 맞는지 확인한 후, OK를 선택합니다. 이 단계는 새로운 파일이 생성되기 전까지는 접속할 때마다 계속 실행해주어야 합니다.\n여기까지 잘 진행되셨다면, SSH에 접속되었습니다!\n\n\n4. 주의 사항\n일부 Mac 사용자들 중, 접속이 원활히 이루어지지 않는 경우를 종종 확인할 수 있습니다.\n이때에는 pem 파일을 vscode에서 열어보신 후, 아래와 같이 설정되어있는 지 확인해주세요. pem 파일은 LF의 형태여야 합니다.\n\n만일 본인의 pem 파일이 CRLF로 성정되어있다면, 해당 부분을 클릭하시면 다음과 같이 LF로 변경하실 수 있습니다.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Chapter2. 접속 방법</span>"
     ]
